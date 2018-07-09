@@ -1,0 +1,39 @@
+{
+  "name": "pji",
+  "version": "0.1.0",
+  "description": "Init Project with CLI Tool",
+  "bin": {
+    "pji": "cli.js"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "test": "xo && ava --verbose"
+  },
+  "repository": "banminkyoz/pji",
+  "keywords": [
+    "Init Javascript Project",
+    "Init Node Project",
+    "Init Project",
+    "Init Tool",
+    "CLI",
+    "Kyoz"
+  ],
+  "author": {
+    "name": "Kyoz",
+    "email": "banminkyoz@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "xo": "^0.21.1"
+  },
+  "xo": {
+    "space": 2
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "inquirer": "^6.0.0"
+  }
+}
