@@ -28,40 +28,44 @@ module.exports = {
   inputs: [
     {
       type: 'input',
-      name: 'name',
+      name: 'projectName',
       message: 'Project name:',
       default: 'test'
     },
     {
       type: 'input',
-      name: 'description',
-      message: 'Description:'
+      name: 'projectDescription',
+      message: 'Description:',
+      default: 'Project description'
     },
     {
       type: 'input',
-      name: 'version',
+      name: 'projectVersion',
       message: 'Version:',
       default: '0.1.0'
     },
     {
       type: 'input',
-      name: 'tags',
-      message: 'Tags:'
+      name: 'projectTags',
+      message: 'Tags:',
+      default: 'plugin, node, module, node_module'
     },
     {
       type: 'input',
-      name: 'author_name',
-      message: 'Author name:'
+      name: 'githubUser',
+      message: 'Github user :'
     },
     {
       type: 'input',
-      name: 'author_email',
-      message: 'Author email:'
+      name: 'authorName',
+      message: 'Author name:',
+      default: 'author'
     },
     {
       type: 'input',
-      name: 'git_repo',
-      message: 'Git repository:'
+      name: 'authorEmail',
+      message: 'Author email:',
+      default: 'author@gmail.com'
     }
   ]
 };

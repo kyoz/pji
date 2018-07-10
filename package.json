@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Init Project with CLI Tool",
   "bin": {
-    "pji": "cli.js"
+    "pji": "app/index.js"
   },
   "engines": {
     "node": ">=6"
@@ -13,11 +13,11 @@
   },
   "repository": "banminkyoz/pji",
   "keywords": [
-    "Init Javascript Project",
-    "Init Node Project",
-    "Init Project",
-    "Init Tool",
-    "CLI",
+    "node",
+    "node_module",
+    "cli",
+    "init",
+    "template",
     "Kyoz"
   ],
   "author": {
@@ -30,10 +30,15 @@
     "xo": "^0.21.1"
   },
   "xo": {
-    "space": 2
+    "space": 2,
+    "ignores": [
+      "app/templates/**"
+    ]
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "inquirer": "^6.0.0"
+    "ejs": "^2.6.1",
+    "inquirer": "^6.0.0",
+    "underscore.string": "^3.3.4"
   }
 }
