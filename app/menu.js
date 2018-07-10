@@ -5,22 +5,11 @@ module.exports = {
   chooses: [
     {
       type: 'list',
-      name: 'type',
+      name: 'projectType',
       message: 'Choose project type ?',
       choices: [
         'Node',
         'Node CLI'
-      ]
-    },
-    {
-      type: 'list',
-      name: 'license',
-      message: 'Choose license ?',
-      choices: [
-        'MIT',
-        'Apache 2.0',
-        'GNU GPLv3',
-        'No License'
       ]
     }
   ],
@@ -52,7 +41,8 @@ module.exports = {
     {
       type: 'input',
       name: 'githubUser',
-      message: 'Github user :'
+      message: 'Github user :',
+      default: 'github_user'
     },
     {
       type: 'input',

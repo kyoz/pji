@@ -6,7 +6,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const ejs = require('ejs');
 const chalk = require('chalk');
-// Const underscoreString = require('underscore.string');
+const slugify = require('underscore.string/slugify');
 
 const menu = require('./menu.js');
 
@@ -20,35 +20,60 @@ const getUserInfo = new Promise(resolve => {
 });
 
 getUserInfo.then(options => {
-  generateFile('.gitignore', options, '_gitignore');
-  generateFile('.npmrc', options);
-  generateFile('.travis.yml', options);
-  generateFile('index.js', options);
-  generateFile('test.js', options);
-  generateFile('LICENSE', options);
-  generateFile('README.md', options);
+  options.projectName = slugify(options.projectName);
+  options.projectTags = options.projectTags ? options.projectTags.split(',') : [];
+
+  console.log(chalk.green.bold('\n>> Starting init your project...\n'));
+
+  const tasks = [];
+  // General files
+  tasks.push(generateFile('.editorconfig', '_editorconfig'));
+  tasks.push(generateFile('.gitignore', '_gitignore'));
+  tasks.push(generateFile('.npmrc', '_npmrc'));
+  tasks.push(generateFile('.travis.yml', '_travis.yml'));
+  tasks.push(generateFile('package.json', '_package.json', options));
+  tasks.push(generateFile('LICENSE', 'LICENSE', options));
+  tasks.push(generateFile('README.md', 'README.md', options));
+  tasks.push(generateFile('test.js', 'test.js'));
+
+  // Specific choose files
+  switch (options.projectType) {
+    case 'Node':
+      tasks.push(generateFile('index.js', 'index.js'));
+      break;
+    case 'Node CLI':
+      tasks.push(generateFile('cli.js', 'cli.js'));
+      break;
+    default:
+  }
+
+  // Start gen files
+  Promise.all(tasks).then(() => {
+    console.log(chalk.green.bold('\n>> Done! Start coding now bro 7:)\n'));
+  });
 });
 
-function generateFile(genFileName, options, tplFileName) {
-  tplFileName = tplFileName ? tplFileName : genFileName;
+function generateFile(genFileName, tplFileName, options) {
+  return new Promise((resolve, reject) => {
+    const from = `${__dirname}/templates/${tplFileName}`;
+    const to = `${process.cwd()}/${genFileName}`;
 
-  const from = `${__dirname}/templates/${tplFileName}`;
-  const to = `${process.cwd()}/${genFileName}`;
-
-  fs.readFile(from, 'utf8', (err, data) => {
-    if (err) {
-      console.log(chalk.red(`✘ Can't read file ${genFileName}`));
-      throw err;
-    }
-
-    const renderedData = ejs.render(data, options);
-
-    fs.writeFile(to, renderedData, err => {
+    fs.readFile(from, 'utf8', (err, data) => {
       if (err) {
-        console.log(chalk.red(`✘ Can't create ${genFileName}`));
-        throw err;
+        console.log(`${chalk.red('✘')}  Can't read file ${genFileName}`);
+        reject(err);
       }
-      console.log(chalk.green(`✔ Created ${tplFileName}`));
+
+      const renderedData = ejs.render(data, options);
+
+      fs.writeFile(to, renderedData, err => {
+        if (err) {
+          console.log(`${chalk.red('✘')}  Can't create ${genFileName}`);
+          reject(err);
+        }
+        console.log(`${chalk.green('✔')}  Created ${genFileName}`);
+        resolve();
+      });
     });
   });
 }

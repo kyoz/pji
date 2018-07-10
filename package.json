@@ -1,7 +1,11 @@
 {
   "name": "pji",
   "version": "0.1.0",
-  "description": "Init Project with CLI Tool",
+  "description": "Init node project",
+  "author": {
+    "name": "Kyoz",
+    "email": "banminkyoz@gmail.com"
+  },
   "bin": {
     "pji": "app/index.js"
   },
@@ -20,11 +24,12 @@
     "template",
     "Kyoz"
   ],
-  "author": {
-    "name": "Kyoz",
-    "email": "banminkyoz@gmail.com"
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "ejs": "^2.6.1",
+    "inquirer": "^6.0.0",
+    "underscore.string": "^3.3.4"
   },
-  "license": "MIT",
   "devDependencies": {
     "ava": "^0.25.0",
     "xo": "^0.21.1"
@@ -35,10 +40,5 @@
       "app/templates/**"
     ]
   },
-  "dependencies": {
-    "chalk": "^2.4.1",
-    "ejs": "^2.6.1",
-    "inquirer": "^6.0.0",
-    "underscore.string": "^3.3.4"
-  }
+  "license": "MIT"
 }
