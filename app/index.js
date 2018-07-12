@@ -10,10 +10,15 @@ const slugify = require('underscore.string/slugify');
 
 const menu = require('./menu.js');
 
+const getTemplatePath = tplFileName => `${__dirname}/templates/${tplFileName}`;
+const getDestinationPath = genFileName => `${process.cwd()}/${genFileName}`;
+
 const getUserInfo = new Promise(resolve => {
   inquirer.prompt(menu.chooses).then(chooseResponse => {
     inquirer.prompt(menu.inputs).then(inputResponse => {
-      const response = {...chooseResponse, ...inputResponse};
+      const response = { ...chooseResponse,
+        ...inputResponse
+      };
       resolve(response);
     });
   });
@@ -55,10 +60,7 @@ getUserInfo.then(options => {
 
 function generateFile(genFileName, tplFileName, options) {
   return new Promise((resolve, reject) => {
-    const from = `${__dirname}/templates/${tplFileName}`;
-    const to = `${process.cwd()}/${genFileName}`;
-
-    fs.readFile(from, 'utf8', (err, data) => {
+    fs.readFile(getTemplatePath(tplFileName), 'utf8', (err, data) => {
       if (err) {
         console.log(`${chalk.red('✘')}  Can't read file ${genFileName}`);
         reject(err);
@@ -66,13 +68,26 @@ function generateFile(genFileName, tplFileName, options) {
 
       const renderedData = ejs.render(data, options);
 
-      fs.writeFile(to, renderedData, err => {
+      fs.writeFile(getDestinationPath(genFileName), renderedData, err => {
         if (err) {
           console.log(`${chalk.red('✘')}  Can't create ${genFileName}`);
           reject(err);
         }
-        console.log(`${chalk.green('✔')}  Created ${genFileName}`);
-        resolve();
+
+        if (genFileName !== 'index.js' && genFileName !== 'cli.js') {
+          console.log(`${chalk.green('✔')}  Created ${genFileName}`);
+          resolve();
+        } else {
+          fs.chmod(getDestinationPath(genFileName), '0700', err => {
+            if (err) {
+              console.log(`${chalk.red('✘')}  Can't add execute permission for ${genFileName}`);
+              reject(err);
+            }
+
+            console.log(`${chalk.green('✔')}  Created ${genFileName}`);
+            resolve();
+          });
+        }
       });
     });
   });
