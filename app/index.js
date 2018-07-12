@@ -16,9 +16,7 @@ const getDestinationPath = genFileName => `${process.cwd()}/${genFileName}`;
 const getUserInfo = new Promise(resolve => {
   inquirer.prompt(menu.chooses).then(chooseResponse => {
     inquirer.prompt(menu.inputs).then(inputResponse => {
-      const response = { ...chooseResponse,
-        ...inputResponse
-      };
+      const response = {...chooseResponse, ...inputResponse};
       resolve(response);
     });
   });
