@@ -8,6 +8,9 @@
   },<% if (projectType === 'Node CLI') { %>
   "bin": {
     "<%= projectName %>": "cli.js"
+  },<% } else { %>
+  "files": {
+    "index.js"
   },<% } %>
   "engines": {
     "node": ">=6"
