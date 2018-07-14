@@ -5,20 +5,20 @@
   "author": {
     "name": "<%= authorName %>",
     "email": "<%= authorEmail %>"
-  },<% if (projectType === 'Node CLI') { %>
-  "bin": {
-    "<%= projectName %>": "cli.js"
-  },<% } else { %>
-  "files": {
-    "index.js"
-  },<% } %>
+  },
+  "repository": "<%= githubUser %>/<%= projectName %>",
+  "license": "MIT",
   "engines": {
     "node": ">=6"
-  },
+  },<% if (projectType === 'Node with CLI'){ %>
+  "bin": "cli.js",<% } %>
+  "files": [
+    "index.js"<% if (projectType === 'Node with CLI'){ %>,
+    "cli.js" <% } %>
+  ],
   "scripts": {
     "test": "xo && ava --verbose"
   },
-  "repository": "<%= githubUser %>/<%= projectName %>",
   "keywords": [ <% 
     let i=0; const length=projectTags.length;
     projectTags.forEach(function(tag){ %>
@@ -32,6 +32,5 @@
   },
   "xo": {
     "space": 2
-  },
-  "license": "MIT"
+  }
 }

@@ -6,16 +6,19 @@
     "name": "Kyoz",
     "email": "banminkyoz@gmail.com"
   },
-  "bin": {
-    "pji": "app/index.js"
-  },
+  "repository": "banminkyoz/pji",
+  "license": "MIT",
   "engines": {
     "node": ">=6"
   },
+  "bin": "cli.js",
+  "files": [
+    "cli.js",
+    "data"
+  ],
   "scripts": {
     "test": "xo && ava --verbose"
   },
-  "repository": "banminkyoz/pji",
   "keywords": [
     "node",
     "node_module",
@@ -28,7 +31,10 @@
     "chalk": "^2.4.1",
     "ejs": "^2.6.1",
     "inquirer": "^6.0.0",
-    "underscore.string": "^3.3.4"
+    "npm-current-user": "^0.1.2",
+    "ora": "^2.1.0",
+    "underscore.string": "^3.3.4",
+    "user-info": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.25.0",
@@ -37,8 +43,7 @@
   "xo": {
     "space": 2,
     "ignores": [
-      "app/templates/**"
+      "data/templates/**"
     ]
-  },
-  "license": "MIT"
+  }
 }

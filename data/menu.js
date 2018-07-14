@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 module.exports = {
@@ -9,7 +8,7 @@ module.exports = {
       message: 'Choose project type ?',
       choices: [
         'Node',
-        'Node CLI'
+        'Node with CLI'
       ]
     }
   ],
@@ -30,7 +29,7 @@ module.exports = {
       type: 'input',
       name: 'projectVersion',
       message: 'Version:',
-      default: '0.1.0'
+      default: '0.0.0'
     },
     {
       type: 'input',
