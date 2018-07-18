@@ -30,6 +30,7 @@ pji.getUserInput.then(options => {
       tasks.push(pji.generateFile('index.js', 'index.js'));
       break;
     case 'Node with CLI':
+      tasks.push(pji.generateFile('index.js', 'index.js'));
       tasks.push(pji.generateFile('cli.js', 'cli.js'));
       break;
     default:
