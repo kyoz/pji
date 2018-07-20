@@ -28,10 +28,7 @@ module.exports.generateFile = (genFileName, tplFileName, options) => {
           reject(err);
         }
 
-        if (genFileName !== 'index.js' && genFileName !== 'cli.js') {
-          console.log(`${chalk.green('✔')}  Created ${genFileName}`);
-          resolve();
-        } else {
+        if (genFileName === 'cli.js') {
           fs.chmod(getDestinationPath(genFileName), '0700', err => {
             if (err) {
               console.log(`${chalk.red('✘')}  Can't add execute permission for ${genFileName}`);
@@ -41,6 +38,9 @@ module.exports.generateFile = (genFileName, tplFileName, options) => {
             console.log(`${chalk.green('✔')}  Created ${genFileName}`);
             resolve();
           });
+        } else {
+          console.log(`${chalk.green('✔')}  Created ${genFileName}`);
+          resolve();
         }
       });
     });
